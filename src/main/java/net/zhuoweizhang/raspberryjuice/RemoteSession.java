@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import org.apache.commons.lang.ObjectUtils.Null;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.block.*;
@@ -508,7 +509,14 @@ public class RemoteSession {
 					}
 				}
 				send(bdr.toString());
-
+			
+			} else if (c.equals("custom.message")) {
+				if (args.length <= 1) {
+					handleCustomMessage(args[0], null);
+				} else {
+					handleCustomMessage(args[0], Arrays.copyOfRange(args, 1, args.length));
+				}
+			
 			// not a command which is supported
 			} else {
 				plugin.getLogger().warning(c + " is not supported.");
@@ -520,6 +528,14 @@ public class RemoteSession {
 			e.printStackTrace();
 			send("Fail");
 		
+		}
+	}
+
+	private void handleCustomMessage(String identifier, String[] args) {
+		if (identifier == null) {
+			throw new IllegalArgumentException("Identifier cannot be null");
+		} else {
+			plugin.getLogger().warning(identifier + " command is not supported or not found.");
 		}
 	}
 

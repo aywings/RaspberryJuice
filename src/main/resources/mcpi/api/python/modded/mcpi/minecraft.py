@@ -250,6 +250,9 @@ class Minecraft:
         types = [t for t in s.split("|") if t]
         return [Entity(int(e[:e.find(",")]), e[e.find(",") + 1:]) for e in types]
 
+    def sendCustomMessage(self, *args):
+        """Send custom message to the Bukkit Server, for Development Purpose Only"""
+        self.conn.send(b"custom.message", args)
 
     @staticmethod
     def create(address = "localhost", port = 4711):
