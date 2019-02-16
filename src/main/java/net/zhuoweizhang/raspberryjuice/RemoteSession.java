@@ -535,7 +535,8 @@ public class RemoteSession {
 		if (identifier == null) {
 			throw new IllegalArgumentException("Identifier cannot be null");
 		} else {
-			plugin.getLogger().warning(identifier + " command is not supported or not found.");
+			plugin.getLogger().info(identifier + " executed, arguments: " + args.toString());
+			send("Success");
 		}
 	}
 
